@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Plus, Search, Filter, ArrowUpRight, ArrowDownLeft, Clock, Banknote, User, MessageCircle, MoreVertical } from 'lucide-react';
+import { Plus, Search, Filter, Clock, Banknote, MoreVertical } from 'lucide-react';
 import { transactionService } from '../services/transactions';
 import { Transaction } from '../types';
 import { supabase } from '../lib/supabase';
@@ -15,13 +15,13 @@ export const Dashboard: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    supabase.auth.getUser().then(({ data: { user } }) => {
-      if (!user) {
+    supabase.auth.getUser().then(({ data: { user: authUser } }) => {
+      if (!authUser) {
         navigate('/login');
         return;
       }
-      setUser(user);
-      transactionService.getTransactions(user.id).then((data) => {
+      setUser(authUser);
+      transactionService.getTransactions(authUser.id).then((data) => {
         setTransactions(data);
         setLoading(false);
       });
@@ -33,12 +33,13 @@ export const Dashboard: React.FC = () => {
       .on(
         'postgres_changes',
         { event: '*', schema: 'public', table: 'transactions' },
-        (payload) => {
+        () => {
           // Refresh transactions or handle specific change
-          console.log('Change received!', payload);
-          if (user) {
-            transactionService.getTransactions(user.id).then(setTransactions);
-          }
+          supabase.auth.getUser().then(({ data: { user: authUser } }) => {
+            if (authUser) {
+              transactionService.getTransactions(authUser.id).then(setTransactions);
+            }
+          });
         }
       )
       .subscribe();
@@ -59,6 +60,7 @@ export const Dashboard: React.FC = () => {
     completed: transactions.filter(t => t.status === 'completed').length,
     amountTotal: transactions.reduce((acc, t) => acc + Number(t.amount), 0)
   };
+
 
   if (loading) return (
     <div className="flex h-[80vh] items-center justify-center p-12">

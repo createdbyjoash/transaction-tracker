@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Plus, Search, Filter, Clock, Banknote, MoreVertical } from 'lucide-react';
+import { Plus, Search, Filter, Clock, Banknote, MoreVertical, ArrowUpRight } from 'lucide-react';
 import { transactionService } from '../services/transactions';
 import { Transaction } from '../types';
 import { supabase } from '../lib/supabase';

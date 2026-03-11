@@ -5,7 +5,7 @@ import { Transaction } from '../types';
 import { TransactionTimeline } from '../components/transactions/Timeline';
 import { Badge } from '../components/common/Badge';
 import { Card } from '../components/common/Card';
-import { ArrowLeft, Share2, Copy, ExternalLink, ShieldCheck, CornerDownRight } from 'lucide-react';
+import { ArrowLeft, Share2, Copy, ExternalLink, ShieldCheck, CornerDownRight, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export const Track: React.FC = () => {

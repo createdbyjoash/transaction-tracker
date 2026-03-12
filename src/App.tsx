@@ -9,20 +9,14 @@ import { Toaster } from 'react-hot-toast';
 function App() {
   return (
     <Router>
-      <div className="min-h-screen bg-slate-50 text-slate-900 selection:bg-blue-100 selection:text-blue-700">
+      <div id="app-test-container" className="min-h-screen bg-slate-50 text-slate-900 selection:bg-blue-100 selection:text-blue-700">
+        <h1 style={{ position: 'fixed', top: 0, left: 0, background: 'red', color: 'white', zIndex: 9999 }}>REACT LOADED SUCCESS</h1>
         <Routes>
-          {/* Public Landing & Login */}
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Home />} />
-          
-          {/* Protected Routes */}
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/create" element={<CreateTransaction />} />
-          
-          {/* Public Tracking Page */}
           <Route path="/track/:id" element={<Track />} />
-          
-          {/* Fallback */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
         <Toaster position="bottom-right" reverseOrder={false} />
@@ -32,3 +26,4 @@ function App() {
 }
 
 export default App;
+

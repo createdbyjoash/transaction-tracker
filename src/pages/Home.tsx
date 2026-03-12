@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Shield, Lock, Mail, ArrowRight, Activity, Globe, CreditCard } from 'lucide-react';
 
 export const Home: React.FC = () => {
+  console.log('HOME COMPONENT: Rendering...');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);

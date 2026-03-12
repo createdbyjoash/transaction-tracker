@@ -7,6 +7,7 @@ import { Track } from './pages/Track';
 import { Toaster } from 'react-hot-toast';
 
 function App() {
+  console.log('APP COMPONENT: Initializing...');
   return (
     <Router>
       <div id="app-test-container" className="min-h-screen bg-slate-50 text-slate-900 selection:bg-blue-100 selection:text-blue-700">
